@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="es">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0057b8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Calcula cuánto dinero te queda al vender tu vivienda">
+<meta property="og:description" content="Calculadora inmobiliaria de REMAX New Life + Seneas para estimar gastos, liquidez y opciones de tu operación en Madrid.">
+<meta property="og:site_name" content="REMAX New Life + Seneas">
+<meta name="description" content="Calcula de forma orientativa cuánto dinero te queda al vender o comprar una vivienda en Madrid. REMAX New Life + Seneas.">
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Calculadora Inmobiliaria | REMAX New Life + Seneas</title>
@@ -25,12 +33,44 @@ button.primary{background:var(--red);color:#fff;border:0;padding:13px 20px;borde
 table{width:100%;border-collapse:collapse;background:#fff}.tablewrap{overflow:auto}th,td{padding:10px;border-bottom:1px solid var(--line);text-align:left;font-size:13px}th{background:#f2f4f7}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat strong{display:block;font-size:25px;color:var(--blue)}.note{font-size:12px;color:var(--muted);line-height:1.5}.seneas{border:2px solid #b7d7f7;background:#f8fbff}
 @media(max-width:700px){form{grid-template-columns:1fr}.hero h1{font-size:27px}.stats{grid-template-columns:repeat(2,1fr)}header{align-items:flex-start;flex-direction:column}nav button{margin:0 10px 0 0}}
+
+/* Facebook / mobile landing enhancements */
+.fbHero{background:linear-gradient(135deg,#0057b8,#003b7a);color:#fff;border-radius:20px;padding:24px 20px;margin:14px 0 20px;box-shadow:0 8px 25px rgba(0,0,0,.12)}
+.fbHero h1{font-size:clamp(26px,7vw,42px);line-height:1.05;margin:0 0 10px}
+.fbHero p{font-size:17px;line-height:1.4;margin:0 0 16px}
+.fbBadge{display:inline-block;background:#fff;color:#0057b8;font-weight:800;border-radius:999px;padding:6px 10px;font-size:12px;margin-bottom:12px}
+.fbCta{display:block;width:100%;border:0;border-radius:12px;background:#fff;color:#0057b8;font-weight:800;font-size:18px;padding:15px 18px;text-align:center;cursor:pointer}
+.fbTrust{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0 18px}
+.fbTrust div{background:#f5f7fa;border-radius:12px;padding:10px 7px;text-align:center;font-size:12px;font-weight:700}
+.fbSmall{font-size:12px;color:#667085;margin-top:10px}
+@media(max-width:700px){
+  body{font-size:16px}
+  .container,.wrap{width:100%!important;max-width:none!important;padding-left:14px!important;padding-right:14px!important}
+  input,select,button,textarea{font-size:16px!important;min-height:48px}
+  table{font-size:12px}
+  .fbTrust{grid-template-columns:1fr}
+  .fbHero{margin-left:0;margin-right:0}
+}
+
 </style>
 </head>
 <body>
+<div class="fbHero">
+  <div class="fbBadge">MADRID · REMAX NEW LIFE + SENEAS</div>
+  <h1>¿Cuánto dinero te queda realmente al vender tu vivienda?</h1>
+  <p>Haz una estimación de tu operación en menos de 2 minutos. Calcula gastos, hipoteca, deudas y liquidez disponible.</p>
+  <button class="fbCta" type="button" onclick="document.getElementById('calculator')?.scrollIntoView({behavior:'smooth'});">CALCULAR AHORA →</button>
+  <div class="fbSmall" style="color:#eaf2ff">Estimación orientativa. El resultado final depende de las circunstancias concretas de cada operación.</div>
+</div>
+<div class="fbTrust">
+  <div>🏠 Venta</div>
+  <div>💶 Liquidez</div>
+  <div>📍 Comunidad de Madrid</div>
+</div>
+
 <header>
   <div class="brand">REMAX <span>New Life</span> + Seneas</div>
-  <nav><button onclick="show('home')">Calculadora</button><button onclick="show('dashboard')">Mis leads</button></nav>
+  <nav><button onclick="show('home')">Calculadora</button><button onclick="show('dashboard')">Panel privado</button></nav>
 </header>
 <main>
 <section id="home">
@@ -49,7 +89,7 @@ table{width:100%;border-collapse:collapse;background:#fff}.tablewrap{overflow:au
 <section id="calculator" class="hidden">
   <div class="back"><button onclick="show('home')">← Volver</button></div>
   <div class="card"><h2 id="formTitle">Calculadora Madrid</h2>
-    <form id="calcForm">
+    <form id="calcForm" action="https://formspree.io/f/xppwlpgk" method="POST">
       <div><label>Municipio de Madrid</label><input id="municipio" required placeholder="Ej. Majadahonda"></div>
       <div><label>Operación</label><select id="operacion" onchange="toggleOperation()"><option value="venta">Venta</option><option value="compra">Compra</option><option value="compraventa">Compra + venta</option></select></div>
       <div><label>Tipo de vivienda</label><select id="tipo"><option>Piso</option><option>Chalet</option><option>Adosado</option><option>Vivienda protegida</option><option>Otro</option></select></div>
@@ -70,7 +110,10 @@ table{width:100%;border-collapse:collapse;background:#fff}.tablewrap{overflow:au
       <div id="debtExtra" class="hidden"><label>Situación especial</label><select id="situacion"><option>Deuda</option><option>Embargo</option><option>Hacienda / Seguridad Social</option><option>Subasta</option></select></div>
 
       <div class="full"><button class="primary" type="submit">CALCULAR GASTOS AUTOMÁTICAMENTE</button></div>
-    </form>
+    
+<input type="hidden" name="fuente" value="Calculadora Facebook REMAX New Life + Seneas">
+<input type="hidden" name="aviso" value="Lead generado desde la calculadora inmobiliaria">
+</form>
     <div id="result" class="result hidden"></div>
     <p class="note">Cálculo orientativo para operaciones en la Comunidad de Madrid. El ITP se calcula con carácter general al 6%; la base puede venir determinada por el valor de referencia catastral cuando corresponda. En vivienda nueva se aplica IVA del 10% y AJD según el tramo aplicable. La plusvalía municipal depende de los datos catastrales y de la ordenanza del municipio. citeturn1search0turn1search3turn0search3</p>
   </div>
@@ -214,5 +257,18 @@ function renderLeads(){let a=getLeads();sTotal.textContent=a.length;sUrg.textCon
 function exportCSV(){let a=getLeads();if(!a.length){alert('No hay leads para exportar.');return}let keys=['date','nombre','telefono','email','municipio','tipo','operation','precioVenta','precioCompra','precio','hipoteca','deuda','saleTotal','buyTotal','baseLiquidezSeneas','anticipoSeneas','priority','status'];let csv=[keys.join(';'),...a.map(x=>keys.map(k=>`"${String(x[k]??'').replaceAll('"','""')}"`).join(';'))].join('\n');let blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),ael=document.createElement('a');ael.href=url;ael.download='leads_remax_new_life.csv';ael.click();URL.revokeObjectURL(url)}
 toggleOperation();
 </script>
+
+<div style="max-width:760px;margin:25px auto 10px;padding:0 14px;text-align:center">
+  <div style="border-top:1px solid #e5e7eb;padding-top:18px">
+    <strong>¿Conoces a alguien que quiera vender?</strong><br>
+    <span style="font-size:13px;color:#667085">Comparte esta calculadora con quien pueda necesitarla.</span>
+  </div>
+</div>
+
+
+<div style="max-width:760px;margin:18px auto;padding:0 14px;text-align:center;font-size:12px;color:#667085">
+  Los datos enviados se utilizarán para contactar contigo sobre tu operación inmobiliaria.
+</div>
+
 </body>
 </html>
